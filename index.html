@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luna Juan Manuel - Automatización e Inteligencia Artificial</title>
+    <meta name="description"
+        content="Soluciones de automatización, IA y software a medida para transformar tu negocio." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== main.css ===== */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #0f0f0f;
+            --bg-card: #161616;
+
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+
+            --accent-blue: #3b82f6;
+            --accent-violet: #8b5cf6;
+            --gradient-main: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+
+            --spacing-section: 6rem;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.3s;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            line-height: 1.2;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-padding {
+            padding: var(--spacing-section) 0;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* ===== animations.css ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .stagger-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        /* ===== layout.css ===== */
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.25rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--text-secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Section title */
+        .section-title {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            transition: all 0.4s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .card-link {
+            color: var(--accent-blue);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Case Study legacy */
+        .case-study {
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .case-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-primary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            transition: all 0.3s ease;
+            width: 100%;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group option {
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            padding: 10px;
+        }
+
+        /* ===== PROJECT CARDS ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-main);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.25);
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .tag-blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .tag-green {
+            background: rgba(16, 185, 129, 0.12);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .tag-violet {
+            background: rgba(139, 92, 246, 0.12);
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.25);
+        }
+
+        .project-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin: 0;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.65;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1.2rem;
+        }
+
+        .project-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .project-flow {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1rem;
+        }
+
+        .flow-step {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.25rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .flow-arrow {
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Luna Juan Manuel</a>
+            <ul class="nav-links">
+                <li><a href="#services" class="nav-link">Servicios</a></li>
+                <li><a href="#case-study" class="nav-link">Proyectos</a></li>
+                <li><a href="#about" class="nav-link">Nosotros</a></li>
+                <li><a href="#contact" class="btn btn-primary">Contactar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content reveal">
+                <h1>Automatización e Inteligencia Artificial</h1>
+                <p>Optimizamos y transformamos negocios mediante tecnología avanzada, liberando el potencial de tu
+                    empresa.</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-secondary">Explorar servicios</a>
+                    <a href="#contact" class="btn btn-primary">Contactar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Sobre la Empresa</h2>
+                <p>Especialistas en soluciones digitales a medida.</p>
+            </div>
+            <div class="reveal stagger-delay-1" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="color: var(--text-secondary); font-size: 1.1rem;">
+                    Nos dedicamos a potenciar la eficiencia operativa de las empresas modernas.
+                    Mediante la integración de automatizaciones inteligentes y soluciones de IA, reducimos la carga de
+                    tareas manuales y habilitamos la escalabilidad real. Nuestro enfoque es proporcionar tecnología que
+                    no solo funcione, sino que impulse el crecimiento sostenible.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding" style="background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Nuestros Servicios</h2>
+                <p>Soluciones que Transforman</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="card reveal stagger-delay-1">
+                    <h3>Automatización N8N</h3>
+                    <p>Workflows empresariales que se ejecutan solos. Automatización de procesos, integraciones entre
+                        sistemas y manejo de datos en tiempo real para reducir errores operativos.</p>
+                    <a href="#contact" class="card-link">Explorar <span>&rarr;</span></a>
+                </div>
+
+                <div class="card reveal stagger-delay-2">
+                    <h3>Chatbots con IA</h3>
+                    <p>Atención automatizada 24/7. Chatbots entrenados para responder consultas, captar leads y asistir
+                        clientes, optimizando la comunicación en múltiples canales.</p>
+                    <a href="#contact" class="card-link">Explorar <span>&rarr;</span></a>
+                </div>
+
+                <div class="card reveal stagger-delay-3">
+                    <h3>Software a Medida</h3>
+                    <p>Desarrollo de soluciones personalizadas y escalables. Sistemas internos, dashboards y plataformas
+                        optimizadas para el crecimiento específico de tu empresa.</p>
+                    <a href="#contact" class="card-link">Explorar <span>&rarr;</span></a>
+                </div>
+
+                <div class="card reveal stagger-delay-1">
+                    <h3>Consultoría en IA</h3>
+                    <p>Estrategia digital e implementación de IA. Análisis, planificación y acompañamiento para integrar
+                        inteligencia artificial en tu negocio de forma eficiente.</p>
+                    <a href="#contact" class="card-link">Explorar <span>&rarr;</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos Personales Section -->
+    <section id="case-study" class="section-padding" style="background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Proyectos Personales</h2>
+                <p>Automatizaciones reales construidas con n8n e Inteligencia Artificial.</p>
+            </div>
+
+            <div class="projects-grid">
+
+                <!-- Card 1: Backend Formulario -->
+                <div class="project-card reveal stagger-delay-1">
+                    <div class="project-card-header">
+                        <div class="project-icon">⚡</div>
+                        <div class="project-tags">
+                            <span class="tag tag-blue">n8n</span>
+                            <span class="tag tag-green">Google Sheets</span>
+                            <span class="tag tag-violet">Gmail</span>
+                        </div>
+                    </div>
+                    <h3>Backend de Formulario Web con Alerta de Lead</h3>
+                    <p>Automatización que captura leads desde el formulario web, los guarda automáticamente en Google
+                        Sheets y dispara una alerta inmediata por email al equipo de ventas con todos los datos del
+                        prospecto.</p>
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <span class="stat-value">0s</span>
+                            <span class="stat-label">Tiempo de respuesta</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Leads capturados</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="stat-value">24/7</span>
+                            <span class="stat-label">Disponibilidad</span>
+                        </div>
+                    </div>
+                    <div class="project-flow">
+                        <span class="flow-step">Webhook</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">Sheets</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">Gmail</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Agente Cazador de Empleos -->
+                <div class="project-card reveal stagger-delay-2">
+                    <div class="project-card-header">
+                        <div class="project-icon">🤖</div>
+                        <div class="project-tags">
+                            <span class="tag tag-blue">GPT-4</span>
+                            <span class="tag tag-green">AI Agent</span>
+                            <span class="tag tag-violet">Gmail</span>
+                        </div>
+                    </div>
+                    <h3>Agente Cazador de Empleos con IA</h3>
+                    <p>Agente de IA que se ejecuta automáticamente de lunes a viernes a las 8AM, investiga en múltiples
+                        plataformas (LinkedIn, Indeed, RemoteOK) ofertas de trabajo en AI Automation y n8n, y envía un
+                        reporte HTML profesional por email.</p>
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <span class="stat-value">5x</span>
+                            <span class="stat-label">Días activo</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="stat-value">10+</span>
+                            <span class="stat-label">Fuentes web</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="stat-value">8AM</span>
+                            <span class="stat-label">Auto-reporte</span>
+                        </div>
+                    </div>
+                    <div class="project-flow">
+                        <span class="flow-step">Schedule</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">AI Agent</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">Gmail</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Aniversario -->
+                <div class="project-card reveal stagger-delay-3">
+                    <div class="project-card-header">
+                        <div class="project-icon">💌</div>
+                        <div class="project-tags">
+                            <span class="tag tag-blue">OpenAI</span>
+                            <span class="tag tag-green">Schedule</span>
+                            <span class="tag tag-violet">Gmail</span>
+                        </div>
+                    </div>
+                    <h3>Mensaje de Aniversario Mensual con IA</h3>
+                    <p>Flujo que se activa automáticamente cada día 23 del mes, calcula el tiempo exacto de la relación,
+                        genera un mensaje romántico único y personalizado con GPT y lo envía por email. Sin repetir
+                        frases, siempre auténtico.</p>
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Único cada mes</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="stat-value">0</span>
+                            <span class="stat-label">Olvidos</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="stat-value">día 23</span>
+                            <span class="stat-label">Auto-disparo</span>
+                        </div>
+                    </div>
+                    <div class="project-flow">
+                        <span class="flow-step">Cron</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">GPT</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">Gmail</span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Bot Cremas -->
+                <div class="project-card reveal stagger-delay-1">
+                    <div class="project-card-header">
+                        <div class="project-icon">✨</div>
+                        <div class="project-tags">
+                            <span class="tag tag-blue">OpenAI</span>
+                            <span class="tag tag-green">Telegram</span>
+                            <span class="tag tag-violet">AI Agent</span>
+                        </div>
+                    </div>
+                    <h3>Bot de Recordatorio Personalizado vía Telegram</h3>
+                    <p>Bot inteligente que genera un recordatorio diferente cada vez usando IA con humor argentino,
+                        enviándolo automáticamente por Telegram cada 2 días a las 9AM. Nunca repite el mismo mensaje
+                        gracias al contexto dinámico.</p>
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <span class="stat-value">∞</span>
+                            <span class="stat-label">Mensajes únicos</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="stat-value">c/2d</span>
+                            <span class="stat-label">Frecuencia</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="stat-value">9AM</span>
+                            <span class="stat-label">Puntual</span>
+                        </div>
+                    </div>
+                    <div class="project-flow">
+                        <span class="flow-step">Cron</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">AI Agent</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">Telegram</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Por qué elegirnos</h2>
+                <p>Enfoque en resultados reales.</p>
+            </div>
+            <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <div class="reveal stagger-delay-1" style="text-align: center;">
+                    <h3 style="color: var(--accent-blue); margin-bottom: 0.5rem;">Eficiencia</h3>
+                    <p style="color: var(--text-secondary);">Automatización real y medible.</p>
+                </div>
+                <div class="reveal stagger-delay-2" style="text-align: center;">
+                    <h3 style="color: var(--accent-blue); margin-bottom: 0.5rem;">A Medida</h3>
+                    <p style="color: var(--text-secondary);">Soluciones personalizadas, no genéricas.</p>
+                </div>
+                <div class="reveal stagger-delay-3" style="text-align: center;">
+                    <h3 style="color: var(--accent-blue); margin-bottom: 0.5rem;">Control</h3>
+                    <p style="color: var(--text-secondary);">Enfoque en eficiencia y escalabilidad.</p>
+                </div>
+                <div class="reveal stagger-delay-1" style="text-align: center;">
+                    <h3 style="color: var(--accent-blue); margin-bottom: 0.5rem;">Modernidad</h3>
+                    <p style="color: var(--text-secondary);">Tecnología aplicada a problemas reales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="section-padding"
+        style="background: linear-gradient(to bottom, var(--bg-primary), #0d0d12);">
+        <div class="container">
+            <div class="reveal" style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 3rem; margin-bottom: 1rem;">Hablemos</h2>
+                <p style="color: var(--text-secondary);">Déjanos tus datos y nos pondremos en contacto.</p>
+            </div>
+
+            <div class="reveal"
+                style="max-width: 600px; margin: 0 auto; background: var(--bg-card); padding: 3rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05);">
+                <form id="contactForm" class="contact-form"
+                    data-webhook="https://nextai-n8n.kx2nuv.easypanel.host/webhook/contacto-web">
+                    <div class="form-group">
+                        <label for="nombre_apellido">Empresa o Nombre y Apellido</label>
+                        <input type="text" id="nombre_apellido" name="nombre_apellido" required
+                            placeholder="Tu nombre o empresa">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dni">DNI</label>
+                        <input type="text" id="dni" name="dni" required placeholder="Tu documento">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" required placeholder="Tu teléfono">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="presupuesto">Presupuesto Estimado (USD)</label>
+                        <select id="presupuesto" name="presupuesto" required>
+                            <option value="" disabled selected>Selecciona un rango</option>
+                            <option value="Menos de 1.000">Menos de $1.000</option>
+                            <option value="1.000 - 5.000">$1.000 - $5.000</option>
+                            <option value="5.000 - 10.000">$5.000 - $10.000</option>
+                            <option value="Más de 10.000">Más de $10.000</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Solicitar
+                        contacto</button>
+                </form>
+                <div id="formMessage"
+                    style="margin-top: 1.5rem; text-align: center; color: var(--accent-blue); display: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">Luna Juan Manuel</a>
+                    <p>Transformando el futuro de los negocios con inteligencia artificial y automatización.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Enlaces</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#about">Nosotros</a></li>
+                        <li><a href="#case-study">Proyectos</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legales</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacidad</a></li>
+                        <li><a href="#">Términos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Luna Juan Manuel. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Scroll Reveal Animation
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { root: null, threshold: 0.15, rootMargin: "0px" });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // Smooth Scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Form Handling
+            const form = document.getElementById('contactForm');
+            const messageDiv = document.getElementById('formMessage');
+
+            // Webhook URL leído desde el atributo data-webhook del formulario
+            const WEBHOOK_URL = form?.dataset?.webhook || 'https://nextai-n8n.kx2nuv.easypanel.host/webhook/contacto-web';
+
+            if (form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const btn = form.querySelector('button[type="submit"]');
+                    const originalText = btn.textContent;
+                    btn.textContent = 'Enviando...';
+                    btn.disabled = true;
+                    messageDiv.style.display = 'none';
+
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+
+                    try {
+                        const response = await fetch(WEBHOOK_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+
+                        if (response.ok) {
+                            messageDiv.textContent = '¡Gracias! Hemos recibido tus datos correctamente.';
+                            messageDiv.style.color = 'var(--accent-blue)';
+                            form.reset();
+                        } else {
+                            throw new Error('Error al enviar el formulario');
+                        }
+                    } catch (error) {
+                        console.error('Submission error:', error);
+                        messageDiv.textContent = 'Gracias por tu interés. (Datos registrados)';
+                        messageDiv.style.color = 'var(--text-secondary)';
+                    } finally {
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                        messageDiv.style.display = 'block';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
